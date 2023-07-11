@@ -22,3 +22,4 @@
 .json
 .jsp
 .master
+.txt
