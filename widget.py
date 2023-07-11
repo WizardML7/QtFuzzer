@@ -29,6 +29,7 @@ QFormLayout
 import mechanicalsoup
 import time
 
+#Initializing mechanicalsoup object
 browser = mechanicalsoup.StatefulBrowser(
     soup_config={'features':'html5lib'},
     user_agent='MechanicalSoup')
@@ -39,8 +40,8 @@ class Main_Window(QWidget):
     def __init__(self, parent = None):
         super(Main_Window, self).__init__(parent)
 
-        #Initializing fuzz params
-        #TODO add sensitive,sanitized,and extensions file GUI
+        #Initializing fuzz params including defualt locations for preset wordlists
+        #TODO add a "Make Defualt" Button to change the defualt paths to files dynamiclly
         self.action = ""
         self.customAuth = ""
         self.Fvector = "C:/Users/dloiacono/Projects/fuzz/vectors.txt"
@@ -120,6 +121,7 @@ class Main_Window(QWidget):
         self.extensions = self.extensions_line_edit.text()
         print(self.extensions)
 
+    #This method is passed to the __init__ and is responsible for the creation of the menu bar at the top of the main window
     def create_menu(self):
         self._menu_bar = QMenuBar(self)
 
@@ -137,7 +139,7 @@ class Main_Window(QWidget):
         self._menu_bar.addMenu(self._help_menu)
         #TODO Add window w/ action that displays Readme
 
-
+    #This method is what creates the two buttons Discover and Test and sets the slots and signals accordingly
     def create_action_options(self):
         actionHBox = QHBoxLayout()
 
@@ -149,6 +151,7 @@ class Main_Window(QWidget):
         test_button.clicked.connect(self.setActionTest)
         return actionHBox
 
+    #This GridBox contains all of the file paramaters. 
     def create_grid_group_box(self):
         self._grid_group_box = QGridLayout()
         layout = QGridLayout()
@@ -205,6 +208,7 @@ class Main_Window(QWidget):
         layout.setColumnStretch(2, 20)
         self._grid_group_box.addLayout(layout,0,0)
 
+    #This GridBox contains the remaining GUI elements including the Starting URL input, Ommitted URLs, and the start button to initiate the scan. 
     def create_form_group_box(self):
         self._form_group_box = QGridLayout()
         layout = QGridLayout()
@@ -242,6 +246,7 @@ class Main_Window(QWidget):
 
         self._form_group_box.addLayout(layout,0,0)
 
+    #This method attepts to use the Words file and extentsions file to guess potential hidden urls in the application. 
     def guessingPages (self,siteList, f,e,url):
         # #Iterating through list and attempting to visit pages by guessing
         for line in f:
@@ -252,6 +257,7 @@ class Main_Window(QWidget):
                 except:
                     continue
 
+    #This method contains the main recursive loop to crawl the webpages. It calls TestVectors when the Test flag is enabled. 
     def linkCrawling(self,siteList,key,new,inputList,cookieList,v,s,sens,url,action,count):
         if(siteList[key] == False):
             # urlInput = False
@@ -303,7 +309,7 @@ class Main_Window(QWidget):
                             else:
                                 print("Recursion limit reached")
 
-
+    #This method is what inputs vectors into the current webpage from a list of vectors. It will only move onto the next page when the method is called again within the linkCrawling method. 
     def testVectors(self,inputs,v,s,sens):
         for i in inputs:
             #print(i)
@@ -369,7 +375,7 @@ class Main_Window(QWidget):
                 count += 1
 #                print(count)
 
-
+    #This is the transformed main method that currently sets up the files, paramaters, and outputs meh results to the CLI.
     def fuzz(self):
 
         #Defineing the dict
@@ -383,7 +389,6 @@ class Main_Window(QWidget):
 #            self.slow = 500
 #        slow = 500
 
-        #TODO add customAuth,sensitive,sanitized,and extensions file GUI
         with open(self.sensitive) as sens:
             with open(self.sanitized) as s:
                 with open(self.Fvector) as v:
@@ -391,7 +396,6 @@ class Main_Window(QWidget):
                         with open(self.Fwords) as f:
                             read_data = f.read()
 
-                            #TODO add customAuth GUI
                             if self.customAuth == 'dvwa':
                                 self.Surl = "http://localhost"
                                 sites.update({"Logout":True})
@@ -474,16 +478,8 @@ class Main_Window(QWidget):
 if __name__ == "__main__":
     app = QApplication(sys.argv)
 
-#    file_name = "/words.txt"
-
     MainW = Main_Window()
     MainW.show()
-
-#    tabWin = TabWindow(file_name)
-#    tabWin.show()
-#    browser.open("https://www.google.com/")
-#    browser.launch_browser()
-#    main()
 
     sys.exit(app.exec())
 
