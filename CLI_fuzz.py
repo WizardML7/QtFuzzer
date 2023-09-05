@@ -207,6 +207,7 @@ def main():
                             print(cookieList.pop())
                             print("Program ending")
                         else:
+                            sites.update({"":False})
                             guessingPages(sites,f,e)
                             linkCrawling(sites,"",None,inputList, cookieList,v,s,sens,0)
                             
