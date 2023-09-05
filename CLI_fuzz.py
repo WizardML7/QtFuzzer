@@ -55,7 +55,7 @@ def linkCrawling(siteList,key,new,inputList,cookieList,v,s,sens,count):
             for new in discovered:
                 newStr = str(new)
                 # Check if http or mail 2 is inside
-                if "http" in newStr or "mailto" in newStr or ".pdf" in newStr:
+                if "http" in newStr or "mailto" in newStr or ".pdf" in newStr or "tel:" in newStr:
                     continue
                 
                 if "?" in newStr:
@@ -74,7 +74,7 @@ def linkCrawling(siteList,key,new,inputList,cookieList,v,s,sens,count):
                     if(newStr not in siteList or siteList[newStr] == False):
                         siteList.update({newStr:False})
                         count += 1
-                        if count < 5:
+                        if count < 10:
                             linkCrawling(siteList,newStr,new,inputList,cookieList,v,s,sens,count)
                         else:
                             print("Recursion limit reached")
@@ -213,6 +213,8 @@ def main():
                             
                             for key in sites:
                                 print(key)
+                                if key not in inputList:
+                                        break
                                 for indiv in inputList[key]:
                                     iStr = str(indiv)
                                     try:
@@ -231,6 +233,6 @@ def main():
     
         
     
-
+#pyhton CLI_fuzz.py discover https://www.rit.edu --vectors=vectors.txt --sensitive=sensitve.txt --extension=extentions.txt --commonWords=word.txt --sanitizedChars=sanitized.txt
 if __name__ == '__main__':
     main()
