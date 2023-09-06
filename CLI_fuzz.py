@@ -213,20 +213,20 @@ def main():
                             
                             for key in sites:
                                 print(key)
-                                if key not in inputList:
-                                        break
-                                for indiv in inputList[key]:
-                                    iStr = str(indiv)
-                                    try:
-                                        if "?" in iStr:
-                                            iStr = iStr[iStr.find('?') + 1:]
-                                            iStr = iStr[:iStr.find('=')]
-                                        else:
-                                            iStr = iStr.split("name=\"")
-                                            iStr = iStr[1][:iStr[1].find('\"')]
-                                        print("\t" + iStr)
-                                    except:
-                                        continue
+                                # if key not in inputList:
+                                #         break
+                                # for indiv in inputList[key]:
+                                #     iStr = str(indiv)
+                                #     try:
+                                #         if "?" in iStr:
+                                #             iStr = iStr[iStr.find('?') + 1:]
+                                #             iStr = iStr[:iStr.find('=')]
+                                #         else:
+                                #             iStr = iStr.split("name=\"")
+                                #             iStr = iStr[1][:iStr[1].find('\"')]
+                                #         print("\t" + iStr)
+                                #     except:
+                                #         continue
 
                             print(cookieList.pop())
                             print("Program ending")
