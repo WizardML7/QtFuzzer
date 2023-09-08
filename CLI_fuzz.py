@@ -6,6 +6,7 @@ browser = mechanicalsoup.StatefulBrowser(user_agent='MechanicalSoup')
 parser = argparse.ArgumentParser(description='Fuzz webpages.')
 parser.add_argument('action',type=str, metavar='', help="Enter action: discover/test")
 parser.add_argument('url',type=str, metavar='', help="Enter in the base url for custom authentication")
+parser.add_argument('depth',type=int, metavar='', help="Enter in the desired amount of depth")
 parser.add_argument('--customAuth',type=str, metavar='', required=False, help="Signal that the fuzzer should use hard-coded authentication for a specific application (e.g. dvwa).")
 parser.add_argument('--commonWords',type=str, metavar='', required=False, help="Newline deliminated file used for page discovery/guessing.")
 parser.add_argument('--extensions',type=str, metavar='', required=False, help="Newline deliminated file of path extensions e.g '.php' and the empty string if not specified.")
@@ -74,7 +75,7 @@ def linkCrawling(siteList,key,new,inputList,cookieList,v,s,sens,count):
                     if(newStr not in siteList or siteList[newStr] == False):
                         siteList.update({newStr:False})
                         count += 1
-                        if count < 10:
+                        if count < args.depth:
                             linkCrawling(siteList,newStr,new,inputList,cookieList,v,s,sens,count)
                         else:
                             print("Recursion limit reached")
