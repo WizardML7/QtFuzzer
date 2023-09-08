@@ -213,7 +213,7 @@ def main():
                             linkCrawling(sites,"",None,inputList, cookieList,v,s,sens,0)
                             
                             for key in sites:
-                                print(key)
+                                print(key.strip())
                                 # if key not in inputList:
                                 #         break
                                 # for indiv in inputList[key]:
