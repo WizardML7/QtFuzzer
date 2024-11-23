@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <title>QtFuzzer: Web Application Fuzzer</title>
+</head>
+<body>
+    <nav class="container-fluid">
+        <ul>
+            <li><strong>Project: QtFuzzer</strong></li>
+        </ul>
+        <ul>
+            <li><a href="https://wizardml7.github.io/">Home</a></li>
+            <li><a href="#overview">Project Overview</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#usage">Usage</a></li>
+            <li><a href="#files">File Inputs</a></li>
+            <li><a href="#futurework">Future Work</a></li>
+            <li><a href="#technologies">Technologies</a></li>
+        </ul>
+    </nav>
+    <main class="container">
+        <div class="grid">
+            <section>
+                <h2>QtFuzzer: Web Application Fuzzer</h2>
+
+                <h3 id="overview">Project Overview</h3>
+                <p>
+                    QtFuzzer is a Python-based web application fuzzer designed to assist in the testing and analysis of web application inputs. It provides a GUI built with the Qt6 framework, allowing users to toggle between two modes: Discover and Test. The tool is intended for ethical use and does not pose a risk of unintended denial-of-service (DOS) attacks in its current form.
+                </p>
+
+                <h3 id="features">Features</h3>
+                <ul>
+                    <li><strong>Discover Mode</strong>: Crawls web pages, identifying links and associated form inputs within the base URL scope.</li>
+                    <li><strong>Test Mode</strong>: Sends vectors (payloads) to identified form inputs and analyzes the responses for potential vulnerabilities.</li>
+                    <li><strong>Custom Authentication</strong>: Supports predefined authentication setups, such as for DVWA.</li>
+                    <li><strong>URL Omission</strong>: Allows users to omit specific URLs (e.g., logout pages) to prevent disruption during crawling.</li>
+                </ul>
+
+                <h3 id="usage">Usage</h3>
+                <p>
+                    The menubar functionality is under development, but users can toggle between Discover and Test modes using the main buttons.
+                </p>
+                <ul>
+                    <li><strong>Discover Mode</strong>: Performs web crawling to identify pages and inputs without sending requests.</li>
+                    <li><strong>Test Mode</strong>: Sends crafted payloads to inputs and analyzes responses for potential vulnerabilities.</li>
+                </ul>
+
+                <h3 id="files">File Inputs</h3>
+                <p>
+                    Users can provide several file inputs to enhance the fuzzing process:
+                </p>
+                <ul>
+                    <li><strong>Words File</strong>: Used in guessing page names (e.g., `(Word).(Extension)`).</li>
+                    <li><strong>Vector File</strong>: Provides payloads for input testing.</li>
+                    <li><strong>Extensions File</strong>: Specifies file extensions for page guessing.</li>
+                    <li><strong>Starting URL</strong>: Defines the base URL for crawling.</li>
+                    <li><strong>URLs to Omit</strong>: Presets URLs to exclude from the crawling process (e.g., logout pages).</li>
+                </ul>
+
+                <h3 id="futurework">Future Work</h3>
+                <ul>
+                    <li>Add a complete reporting feature for results output.</li>
+                    <li>Enhance GUI usability and introduce menu bar functionality.</li>
+                    <li>Enable testing of hidden API arguments using the Python Requests library.</li>
+                    <li>Improve input handling for complex forms with multiple input dependencies (e.g., login forms).</li>
+                </ul>
+
+                <h3 id="technologies">Technologies Used</h3>
+                <ul>
+                    <li><strong>Python</strong>: For backend logic and input analysis.</li>
+                    <li><strong>Qt6 Framework</strong>: For the graphical user interface (GUI).</li>
+                    <li><strong>MechanicalSoup</strong>: For web crawling and page analysis.</li>
+                    <li><strong>Python Requests</strong>: (Planned) For crafting complex requests for API testing.</li>
+                </ul>
+            </section>
+        </div>
+    </main>
+    <footer class="container">
+        <small><a href="https://github.com/WizardML7">GitHub Profile</a> • <a href="#">Contact</a></small>
+    </footer>
+</body>
+</html>
