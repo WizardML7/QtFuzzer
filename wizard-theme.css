@@ -1,0 +1,169 @@
+/* ============================================================
+   WizardML7 Theme — design tokens + dark baseline + project-page helpers
+   Pair with wizard-theme.js (which sets --accent live).
+   These :root values are the *fallback* (used before JS runs).
+   ============================================================ */
+:root {
+  --accent: #13C4DC;          /* live-swapped by wizard-theme.js   */
+  --accent-hot: #45E2F3;      /* brighter hover shade              */
+  --accent-rgb: 19, 196, 220; /* for rgba(var(--accent-rgb), .3)   */
+
+  /* Praetorian-derived dark surfaces (stable, not themed) */
+  --wz-bg:        #0D0D0D;
+  --wz-bg-soft:   #11161a;
+  --wz-card:      #1A1F23;
+  --wz-line:      #2a3036;
+  --wz-fg:        #ffffff;
+  --wz-fg-dim:    #A0A4A8;
+  --wz-fg-mute:   #535B61;
+
+  --wz-font: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --wz-mono: "Source Code Pro", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+
+/* Optional baseline — apply by adding class="wz" to <body>.
+   Leave it off if a page already has its own layout you want to keep. */
+body.wz {
+  margin: 0;
+  background: var(--wz-bg);
+  color: var(--wz-fg);
+  font-family: var(--wz-font);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.6;
+}
+body.wz a { color: var(--accent); text-decoration: none; transition: color .2s; }
+body.wz a:hover { color: var(--accent-hot); }
+body.wz ::selection { background: var(--accent); color: #fff; }
+
+/* Helper utility classes (use anywhere) */
+.wz-accent      { color: var(--accent) !important; }
+.wz-accent-bg   { background: var(--accent) !important; color: #fff !important; }
+.wz-accent-border { border-color: var(--accent) !important; }
+.wz-glow        { box-shadow: 0 0 32px rgba(var(--accent-rgb), .3); }
+
+/* Eyebrow / mono label, Praetorian-style */
+.wz-eyebrow {
+  font-family: var(--wz-mono);
+  font-size: 13px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* Primary button */
+.wz-btn {
+  display: inline-flex; align-items: center; gap: 9px;
+  background: var(--accent); color: #fff;
+  font-family: var(--wz-font); font-weight: 700; font-size: 15px;
+  padding: 13px 22px; border-radius: 4px; border: 0; cursor: pointer;
+  transition: background .2s;
+}
+.wz-btn:hover { background: var(--accent-hot); color: #fff; }
+
+/* Ghost button */
+.wz-btn-ghost {
+  display: inline-flex; align-items: center; gap: 9px;
+  background: transparent; color: var(--wz-fg);
+  font-weight: 700; font-size: 15px; padding: 13px 22px;
+  border-radius: 4px; border: 1px solid rgba(255,255,255,.34); cursor: pointer;
+  transition: border-color .2s, background .2s;
+}
+.wz-btn-ghost:hover { border-color: rgba(255,255,255,.85); background: rgba(255,255,255,.06); color: var(--wz-fg); }
+
+/* ============================================================
+   Project-page layout helpers
+   Used by the WizardML7 project pages (Cuckoo-Watchtower, QtFuzzer,
+   AudioCovertChannel, metadataAnalyzer, ChatCSEC) to match the
+   landing page. Build a page as:
+     <nav class="wz-nav">…</nav>
+     <main class="wz-main">
+       <header class="wz-hero">…</header>
+       <section class="wz-prose">…</section>
+     </main>
+   ============================================================ */
+
+/* Sticky top nav */
+.wz-nav {
+  position: sticky; top: 0; z-index: 50;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 18px; flex-wrap: wrap;
+  padding: 14px 24px;
+  background: rgba(13,13,13,.78);
+  -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--wz-line);
+}
+.wz-nav-brand {
+  display: inline-flex; align-items: center; gap: 9px;
+  font-family: var(--wz-mono); font-size: 14px; font-weight: 500;
+  color: var(--wz-fg); letter-spacing: .04em;
+}
+.wz-nav-brand .wz-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 10px rgba(var(--accent-rgb), .9); }
+.wz-nav-links { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; list-style: none; margin: 0; padding: 0; }
+.wz-nav-links a {
+  font-size: 14px; color: var(--wz-fg-dim); text-decoration: none;
+  font-family: var(--wz-font); transition: color .18s;
+}
+.wz-nav-links a:hover { color: var(--accent); }
+
+/* Page body wrapper */
+.wz-main {
+  position: relative; z-index: 1;
+  max-width: 860px; margin: 0 auto;
+  padding: 72px 24px 96px;
+}
+
+/* Hero block */
+.wz-hero { margin-bottom: 56px; }
+.wz-hero h1 {
+  font-size: clamp(36px, 6vw, 54px); line-height: 1.04; font-weight: 800;
+  letter-spacing: -.02em; margin: 14px 0 18px; color: var(--wz-fg);
+}
+.wz-hero .wz-lede {
+  font-size: 19px; line-height: 1.6; color: var(--wz-fg-dim);
+  max-width: 640px; margin: 0 0 30px;
+}
+.wz-hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
+/* Prose / content area */
+.wz-prose h2 {
+  font-size: 13px; font-family: var(--wz-mono); font-weight: 500;
+  letter-spacing: .08em; text-transform: uppercase; color: var(--accent);
+  margin: 48px 0 8px;
+}
+.wz-prose h3 { font-size: 22px; font-weight: 700; color: var(--wz-fg); margin: 14px 0 14px; letter-spacing: -.01em; }
+.wz-prose h4 { font-size: 17px; font-weight: 700; color: var(--wz-fg); margin: 26px 0 10px; }
+.wz-prose p  { color: var(--wz-fg-dim); font-size: 16px; line-height: 1.7; margin: 0 0 16px; }
+.wz-prose ul, .wz-prose ol { color: var(--wz-fg-dim); font-size: 16px; line-height: 1.7; margin: 0 0 20px; padding-left: 22px; }
+.wz-prose li { margin: 0 0 9px; }
+.wz-prose li strong, .wz-prose p strong { color: var(--wz-fg); font-weight: 700; }
+.wz-prose a { color: var(--accent); text-decoration: none; }
+.wz-prose a:hover { color: var(--accent-hot); text-decoration: underline; }
+.wz-prose img { max-width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--wz-line); margin: 8px 0 12px; }
+
+/* Inline code + code blocks */
+.wz-prose code {
+  font-family: var(--wz-mono); font-size: .92em;
+  background: rgba(var(--accent-rgb), .12); color: var(--accent-hot);
+  padding: 2px 6px; border-radius: 4px;
+}
+.wz-prose pre {
+  background: var(--wz-card); border: 1px solid var(--wz-line); border-radius: 10px;
+  padding: 16px 18px; overflow-x: auto; margin: 0 0 20px;
+}
+.wz-prose pre code { background: none; color: #e6edf3; padding: 0; font-size: 14px; line-height: 1.6; }
+
+/* Card — group a section in a bordered surface */
+.wz-section-card {
+  background: var(--wz-card); border: 1px solid var(--wz-line);
+  border-radius: 14px; padding: 28px 30px; margin: 0 0 22px;
+}
+
+/* Footer */
+.wz-footer {
+  position: relative; z-index: 1;
+  max-width: 860px; margin: 0 auto; padding: 28px 24px 48px;
+  border-top: 1px solid var(--wz-line);
+  color: var(--wz-fg-mute); font-size: 14px;
+}
+.wz-footer a { color: var(--wz-fg-dim); text-decoration: none; }
+.wz-footer a:hover { color: var(--accent); }
