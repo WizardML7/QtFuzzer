@@ -53,12 +53,12 @@ body.wz ::selection { background: var(--accent); color: #fff; }
 /* Primary button */
 .wz-btn {
   display: inline-flex; align-items: center; gap: 9px;
-  background: var(--accent); color: #fff;
+  background: var(--accent); color: #0D0D0D;
   font-family: var(--wz-font); font-weight: 700; font-size: 15px;
   padding: 13px 22px; border-radius: 4px; border: 0; cursor: pointer;
   transition: background .2s;
 }
-.wz-btn:hover { background: var(--accent-hot); color: #fff; }
+.wz-btn:hover { background: var(--accent-hot); color: #0D0D0D; }
 
 /* Ghost button */
 .wz-btn-ghost {
@@ -69,6 +69,16 @@ body.wz ::selection { background: var(--accent); color: #fff; }
   transition: border-color .2s, background .2s;
 }
 .wz-btn-ghost:hover { border-color: rgba(255,255,255,.85); background: rgba(255,255,255,.06); color: var(--wz-fg); }
+
+/* When the buttons are links inside the dark baseline, the generic
+   `body.wz a` color rule (specificity 0,1,1) would otherwise override
+   the button text color. These higher-specificity rules keep button
+   text legible: near-black on the bright accent fill, theme color on
+   the ghost outline. */
+body.wz a.wz-btn,
+body.wz a.wz-btn:hover { color: #0D0D0D; }
+body.wz a.wz-btn-ghost { color: var(--wz-fg); }
+body.wz a.wz-btn-ghost:hover { color: var(--wz-fg); }
 
 /* ============================================================
    Project-page layout helpers
