@@ -76,7 +76,16 @@
       '#wz-switcher .wz-row{display:flex;align-items:center;gap:9px;}' +
       '.wz-sw{width:22px;height:22px;border-radius:50%;cursor:pointer;padding:0;border:2px solid #0D0D0D;' +
         'box-shadow:0 0 0 1px #3a4044;transition:box-shadow .15s,transform .15s;}' +
-      '.wz-sw:hover{transform:scale(1.12);}';
+      '.wz-sw:hover{transform:scale(1.12);}' +
+      /* Mobile: compact pill, no THEME label, tighter so it never overlaps content */
+      '@media (max-width:640px){' +
+        '#wz-switcher{right:12px;bottom:12px;gap:0;padding:7px 11px;}' +
+        '#wz-switcher .wz-lbl{display:none;}' +
+        '#wz-switcher .wz-row{gap:11px;}' +    /* a touch more spacing between swatches for fingers */
+        '.wz-sw{width:20px;height:20px;}' +
+      '}' +
+      /* Respect reduced-motion: calm the swatch hover scale */
+      '@media (prefers-reduced-motion:reduce){.wz-sw:hover{transform:none;}}';
     var st = document.createElement('style');
     st.id = 'wz-theme-style';
     st.textContent = css;

@@ -177,3 +177,46 @@ body.wz a.wz-btn-ghost:hover { color: var(--wz-fg); }
 }
 .wz-footer a { color: var(--wz-fg-dim); text-decoration: none; }
 .wz-footer a:hover { color: var(--accent); }
+
+/* ============================================================
+   Responsive — phones & small screens
+   The switcher's own mobile rules live in wizard-theme.js (injected),
+   so they also apply on the landing page (which loads only the JS).
+   ============================================================ */
+
+/* Never let a long word/URL push the layout wider than the screen */
+body.wz, .wz-prose p, .wz-prose li, .wz-hero .wz-lede { overflow-wrap: anywhere; word-break: break-word; }
+
+@media (max-width: 640px) {
+  .wz-nav {
+    padding: 10px 16px;
+    gap: 6px 16px;
+    justify-content: flex-start;
+    /* let the nav scroll with the page instead of eating vertical space when it wraps */
+    position: static;
+  }
+  /* roomier tap targets for the wrapped nav links (≈44px row height) */
+  .wz-nav-links { gap: 14px 18px; }
+  .wz-nav-links a { padding: 8px 2px; font-size: 15px; }
+
+  .wz-main { padding: 36px 18px 72px; }
+  .wz-hero { margin-bottom: 40px; }
+  .wz-hero .wz-lede { font-size: 17px; }
+  /* full-width, comfortably tall buttons that stack on narrow screens */
+  .wz-hero-actions { gap: 10px; }
+  .wz-hero-actions .wz-btn,
+  .wz-hero-actions .wz-btn-ghost { flex: 1 1 auto; justify-content: center; padding: 14px 18px; }
+
+  .wz-prose h2 { margin-top: 36px; }
+  .wz-prose h3 { font-size: 20px; }
+  .wz-prose pre { padding: 14px 14px; border-radius: 8px; }
+  .wz-prose pre code { font-size: 13px; }
+
+  .wz-footer { padding: 24px 18px 96px; } /* extra bottom room so the switcher pill never sits on the links */
+  .wz-section-card { padding: 22px 20px; }
+}
+
+/* Respect reduced-motion globally */
+@media (prefers-reduced-motion: reduce) {
+  body.wz a, .wz-nav-links a, .wz-btn, .wz-btn-ghost { transition: none; }
+}
